@@ -34,10 +34,10 @@ validation_examples = datasets['validation']
 
 vocab_file = "vocab_en"
 if os.path.isfile(vocab_file + '.subwords'):
-    tokenizer_en = tfds.features.text.SubwordTextEncoder.load_from_file(vocab_file)
+    tokenizer_en = tfds.deprecated.text.SubwordTextEncoder.load_from_file(vocab_file)
 
 else:
-    tokenizer_en = tfds.features.text.SubwordTextEncoder.build_from_corpus(
+    tokenizer_en = tfds.deprecated.text.SubwordTextEncoder.build_from_corpus(
         (en.numpy() for zh, en in train_examples), target_vocab_size=2 ** 13)
     tokenizer_en.save_to_file('vocab_en')
     
