@@ -40,7 +40,7 @@ class Transformer(tf.keras.Model):
         self.final_linear = tf.keras.layers.Dense(target_vocab_size + 1)
 
     def load_stock_weights(self, bert, BertModelLayer, ckpt_file):
-        assert isinstance(bert, BertModelLayer), "Expecting a BertModelLayer instance as first argument"
+        assert isinstance(bert, type(BertModelLayer)), "Expecting a BertModelLayer instance as first argument"
         assert tf.compat.v1.train.checkpoint_exists(ckpt_file), "Checkpoint does not exist: {}".format(ckpt_file)
         ckpt_reader = tf.train.load_checkpoint(ckpt_file)
 
@@ -61,7 +61,7 @@ class Transformer(tf.keras.Model):
         
     def restore_encoder(self, bert_ckpt_file):
 
-        self.load_stock_weights(self.encoder, bert_ckpt_file)
+        self.load_stock_weights(self.encoder, BertModelLayer(), bert_ckpt_file)
 
     def call(self, inp, tar, training, look_ahead_mask, dec_padding_mask):
         enc_output = self.encoder(inp, training=self.encoder.trainable)
