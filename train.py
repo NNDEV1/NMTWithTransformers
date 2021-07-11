@@ -18,7 +18,7 @@ from bert import bert_tokenization
 from bert.loader import map_to_stock_variable_name
 
 from model.transformer import Transformer, Config
-from dataset import tokenizer_en, tokenizer_zh, train_dataset, validation_examples, max_seq_length
+from dataset import tokenizer_en, tokenizer_zh, train_dataset, validation_examples, max_seq_length, BUFFER_SIZE, BATCH_SIZE
 
 target_vocab_size = tokenizer_en.vocab_size + 2
 dropout_rate = 0.1
